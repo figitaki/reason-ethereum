@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+  ((name        rethereum_rlp)
+   (public_name rethereum.rlp)
+   (libraries   (cryptokit))
+   (synopsis    "This library implements recursive length prefix encoding/decoding.")))

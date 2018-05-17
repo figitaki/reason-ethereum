@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+  ((name        rethereum_core)
+   (public_name rethereum.core)
+   (libraries   (rethereum.rlp cryptokit))
+   (synopsis    "Core contains the primitives for an etherem implementation.")))
