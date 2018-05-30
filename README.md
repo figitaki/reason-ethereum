@@ -1,19 +1,19 @@
-# Reason Ethereum
-An experimental implementation of the Ethereum protocol.
+# ![Reason Ethereum](logo.png)
+Ethereum light client written in ReasonML.
 
 How to build the project
 --
 
 Run `make` to compile the libraries and executables that are
 meant to be installed.
-```
+```sh
 $ make
 ```
 
 How to run tests
 --
 
-```
+```sh
 $ make test
 ```
 
@@ -24,11 +24,11 @@ Use `jbuilder utop DIR` where DIR if the folder contains the `jbuild`
 file for a library. For instance, our `sub2` sample library can be
 used as follows:
 
-```
-$ jbuilder utop sub2/lib
+```ocaml
+$ jbuilder utop rlp/lib
 ...
-utop # Proj_sub2.A.do_something ();;
-1525373137.245 seconds have elapsed since 1970-01-01T00:00:00.
+utop # open Rethereum_rlp;;
+utop # Rlp.encode (Rlp.empty ());;
 - : unit = ()
 ```
 
@@ -38,18 +38,18 @@ Installation
 The project can be installed with or without opam.
 Without opam, you can run the following which relies directly on
 dune/jbuilder:
-```
+```sh
 $ make install
 ```
 Similarly:
-```
+```sh
 $ make uninstall
 ```
 
 With opam, you can install the current development version of your
 project as a single opam package. It will override the currently
 installed package of the same name, if any:
-```
+```sh
 $ opam pin add proj .
 ```
 For more information on `opam pin`, please consult the opam documentation.

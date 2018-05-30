@@ -1,9 +1,9 @@
 opam-version: "1.2"
-maintainer: "YOUR EMAIL ADDRESS"
-authors: ["YOUR NAME"]
-homepage: "https://github.com/USERNAME/sample-application"
-bug-reports: "https://github.com/USERNAME/sample-application/issues"
-dev-repo: "https://github.com/USERNAME/sample-application.git"
+maintainer: "careyjanecka@gmail.com"
+authors: ["Carey Janecka"]
+homepage: "https://github.com/figitaki/reason-ethereum"
+bug-reports: "https://github.com/figitaki/reason-ethereum/issues"
+dev-repo: "https://github.com/figitaki/reason-ethereum.git"
 
 build: [
   ["jbuilder" "subst"] {pinned}

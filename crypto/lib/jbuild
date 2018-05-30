@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+  ((name        rethereum_crypto)
+   (public_name rethereum.crypto)
+   (libraries   (cryptokit))
+   (synopsis    "Cryptographic primitives for an etherem implementation.")))

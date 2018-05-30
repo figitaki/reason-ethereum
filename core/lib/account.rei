@@ -4,7 +4,6 @@
   @author  Carey Janecka <careyjanecka@gmail.com
   @created 5/9/18
  */
-
 open Rethereum_rlp;
 
 type t = {
@@ -14,21 +13,22 @@ type t = {
   codeHash: Hash.t
 };
 
-let make : unit => t;
+let make: unit => t;
 
-let hash : t => Hash.t;
+let is_empty: t => bool;
 
 /**
   Returns the storage root of the account's storage trie.
  let storageRoot : t => Trie.t;
  */
-
 /**
   Returns the representation of the account state as Rlp
  */
-let rlp_of_t : t => Rlp.t;
+let rlp_of_t: t => Rlp.t;
 
 /**
   Decodes any well-formed Rlp into an account state object.
  */
-let of_rlp : Rlp.t => t;
+let of_rlp: Rlp.t => t;
+
+let hash: t => Hash.t;

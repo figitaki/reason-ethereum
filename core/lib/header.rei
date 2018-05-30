@@ -16,10 +16,9 @@ type t = {
 };
 
 /*
-  logsBloom: LogFilter.t,
-  */
-
+ logsBloom: LogFilter.t,
+ */
 /**
   Validates the block header, returns true if valid, otherwise false.
  */
-let valid : t => bool;
+let valid: t => bool;

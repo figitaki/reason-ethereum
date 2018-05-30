@@ -13,17 +13,15 @@ type t = {
   codeHash: Hash.t
 };
 
-/**
-  Returns the storage root of the account's storage trie.
- let storageRoot : t => string;// Trie.t;
- */
-
 let make = () => {
-  nonce: Int256.of_int(0),
-  balance: Int256.of_int(0),
+  nonce: Int256.zero,
+  balance: Int256.zero,
   storageRoot: Hash.from_string(""),
   codeHash: Hash.from_string("")
 };
+
+let is_empty = account =>
+  Int256.compare(account.nonce, Int256.zero) == 0;
 
 /**
   Returns the representation of the account state as Rlp
@@ -37,18 +35,15 @@ let rlp_of_t = account =>
   ]
   |> Rlp.of_list;
 
-
-let hash = account =>
-  rlp_of_t(account)
-  |> Rlp.encode
-  |> Hash.from_string;
+let hash = account => rlp_of_t(account) |> Rlp.encode |> Hash.from_string;
 
 /**
   Decodes any well-formed Rlp into an account state object.
+  TODO implement, this is placeholder
 */
 let of_rlp = rlp => {
-  nonce: "0",
-  balance: "0",
+  nonce: Int256.zero,
+  balance: Int256.zero,
   storageRoot: Hash.from_string(""),
   codeHash: Hash.from_string("")
 };
