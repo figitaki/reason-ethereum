@@ -1,5 +1,20 @@
-# ![Reason Ethereum](logo.png)
-Ethereum light client written in ReasonML.
+
+# [![Reason Ethereum](media/header.png)](https://rethereum.com)
+> Experimental light client
+
+[![GitHub release](https://img.shields.io/github/release/figitaki/reason-ethereum.svg)](https://github.com/figitaki/reason-ethereum/releases) [![Build status](https://img.shields.io/travis/figitaki/reason-ethereum/master.svg)](https://travis-ci.com/figitaki/reason-ethereum/master.svg)
+![Coveralls github branch](https://img.shields.io/coveralls/github/figitaki/reason-ethereum/master.svg)
+
+As the Ethereum blockchain has evolved, the need for an optimized mobile implementation has increased. Rethereum tackles this challenge by implementing the light client protocol. Switiching from Geth to Rethereum brought the sync time from 4 hrs to just 20 min.
+
+Installation
+--
+
+First, to obtain the binaries, we use npm so you need Node to be installed.
+
+```bash
+$ npm i -g rethereum
+```
 
 How to build the project
 --
