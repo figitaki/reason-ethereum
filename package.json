@@ -1,0 +1,16 @@
+{
+  "name": "reason-ethereum",
+  "version": "0.0.1-alpha",
+  "description": "Experimental Ethereum light client",
+  "keywords": ["reason", "ethereum", "evm", "bucklescript", "ocaml"],
+  "homepage": "https://github.com/figitaki/reason-ethereum#readme",
+  "bugs": {
+    "url": "https://github.com/figitaki/reason-ethereum/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "jbuilder build",
+    "test": "jbuilder runtest -f",
+    "install": "jbuilder install"
+  }
+}
