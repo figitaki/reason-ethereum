@@ -10,7 +10,7 @@ As the Ethereum blockchain has evolved, the need for an optimized mobile impleme
 Installation
 --
 
-First, to obtain the binaries, we use npm so you need Node to be installed.
+First, to obtain the binaries, you can use npm. So you'll need to make sure you have Node installed on your system.
 
 ```bash
 $ npm i -g rethereum

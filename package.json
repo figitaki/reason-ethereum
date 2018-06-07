@@ -11,6 +11,8 @@
   "scripts": {
     "build": "jbuilder build",
     "test": "jbuilder runtest -f",
-    "install": "jbuilder install"
+    "install": "jbuilder install",
+    "utop": "jbuilder utop",
+    "clean": "jbuilder clean"
   }
 }
