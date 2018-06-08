@@ -3,8 +3,8 @@
 (executable
  ((name run_tests)
   (libraries (alcotest
-              test_sub1
-              test_sub2))))
+              rethereum_core
+              rethereum_rlp))))
 
 (alias
  ((name runtest)
