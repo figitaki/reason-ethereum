@@ -36,11 +36,20 @@ let serialize_pubkey = (ctx, pk) => {
   String.sub(str, ~pos=1, ~len=64);
 };
 
-type signature = (int, string, string);
+type signature = string;
 
-let sign = (~msg, ~key) => {
-  let _ = create_context();
-  let __ = key;
+external ec_sign_recoverable : (context, buffer, buffer, buffer) => int =
+  "ec_sign_recoverable";
 
-  (0, msg, "");
+let sign = (~msg, ~secret) => {
+  let ctx = create_context();
+  let buf = Bigstring.create(65);
+  let _ =
+    ec_sign_recoverable(
+      ctx,
+      buf,
+      Bigstring.of_string(secret),
+      Bigstring.of_string(msg),
+    );
+  buf |> Bigstring.to_string;
 };

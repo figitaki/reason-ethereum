@@ -7,7 +7,7 @@ type seckey = string;
 type pubkey;
 
 /* Recoverable ECDSA signature as a tuple of (r, s, v) */
-type signature = (int, string, string);
+type signature = string;
 
 let create_context: unit => context;
 
@@ -23,7 +23,7 @@ let serialize_pubkey: (context, pubkey) => string;
  * Params - msg: the 32-byte message hash being signed.
  *          key: a 32-byte secret key
  */
-let sign: (~msg: string, ~key: seckey) => signature;
+let sign: (~msg: string, ~secret: seckey) => signature;
 
 /*let recover_pubkey: (~msg: string, ~signature: signature) => pubkey; */
 

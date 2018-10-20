@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include <secp256k1.h>
+#include <secp256k1_recovery.h>
 
 #include <caml/mlvalues.h>
 #include <caml/memory.h>
@@ -66,6 +67,21 @@ CAMLprim value ec_pubkey_create(value ctx, value buf, value sk) {
                                              Caml_ba_data_val(buf),
                                              Caml_ba_data_val(sk)));
 }
-  
-
+ 
+CAMLprim value ec_sign_recoverable(value ctx, value buf, value seckey, value msg) {
+  secp256k1_ecdsa_recoverable_signature sig;
+  int res = secp256k1_ecdsa_sign_recoverable(Caml_ba_data_val(ctx),
+                                          &sig,
+                                          Caml_ba_data_val(msg),
+                                          Caml_ba_data_val(seckey),
+                                          NULL, NULL);
+  int recid;
+  secp256k1_ecdsa_recoverable_signature_serialize_compact(Caml_ba_data_val(ctx),
+                                                       Caml_ba_data_val(buf),
+                                                       &recid,
+                                                       &sig);
+  char *sig_ser = Caml_ba_data_val(buf);
+  sig_ser[64] = recid;
+  return Val_bool(res);
+}
 
