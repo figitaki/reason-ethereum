@@ -11,6 +11,8 @@ Abstract type for ethereum address.
 */
 type t;
 
+let is_empty: t => bool;
+
 /**
 Convert the given string to an Ethereum address. The string is
 read in hexidecimal.

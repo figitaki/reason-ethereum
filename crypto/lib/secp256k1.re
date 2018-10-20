@@ -1,82 +1,46 @@
-open Ctypes;
+open Core_kernel;
 
-open Foreign;
+type buffer = Bigstring.t;
 
-module Context = {
-  /** Abstract secp256k1_context type */
-  type t = ptr(unit);
-  let create = foreign("secp256k1_context_create", char @-> returning(ptr(t)));
-  let clone = foreign("secp256k1_context_clone", ptr(t) @-> ptr(t));
-  let destroy = foreign("secp256k1_context_destroy", ptr(t) @-> void);
+type context = buffer;
+
+external create_context : unit => context = "context_create";
+
+type seckey = string;
+
+external generate_seckey : buffer => seckey = "generate_seckey";
+
+let random_seckey = () => {
+  let buf = Bigstring.create(32);
+  let _ = generate_seckey(buf);
+  buf |> Bigstring.to_string;
 };
 
-module Pubkey = {
-  type t = ptr(unit);
-  let parse =
-    foreign(
-      "secp256k1_ec_pubkey_parse",
-      ptr(Context.t) @-> ptr(t) @-> ptr(uchar) @-> size_t @-> returning(int)
-    );
-  let serialize =
-    foreign(
-      "secp256k1_ec_pubkey_serialize",
-      ptr(Context.t)
-      @-> ptr(char)
-      @-> ptr(size_t)
-      @-> ptr(t)
-      @-> int
-      @-> returning(int)
-    );
-  let to_string = _pubkey =>
-    /* create context */
-    serialize();
+type pubkey = string;
+
+external ec_pubkey_create : (context, buffer, buffer) => int =
+  "ec_pubkey_create";
+external ec_pubkey_serialize : (context, buffer, buffer) => int =
+  "ec_pubkey_serialize";
+
+let create_pubkey = (ctx, sk) => {
+  let buf = Bigstring.create(64);
+  let _ = ec_pubkey_create(ctx, buf, Bigstring.of_string(sk));
+  buf |> Bigstring.to_string;
 };
 
-let nonce_function =
-  ptr(uchar)
-  @-> ptr(uchar)
-  @-> ptr(uchar)
-  @-> ptr(uchar)
-  @-> ptr(void)
-  @-> uint
-  @-> returning(int);
-
-module ECDSA = {
-  let verify =
-    foreign(
-      "secp256k1",
-      ptr(Context.t)
-      @-> ptr(Signature.t)
-      @-> ptr(uchar)
-      @-> ptr(Pubkey.t)
-      @-> returning(int)
-    );
-  let sign =
-    foreign(
-      "secp256k1secp256k1_ecdsa_sign",
-      ptr(Context.t)
-      @-> ptr(Signature.t)
-      @-> ptr(uchar)
-      @-> ptr(uchar)
-      @-> ptr(uchar)
-      @-> funptr(nonce_function)
-      @-> ptr(Pubkey.t)
-      @-> returning(int)
-    );
+let serialize_pubkey = (ctx, pk) => {
+  let buf = Bigstring.create(65);
+  let _ = ec_pubkey_serialize(ctx, buf, Bigstring.of_string(pk));
+  let str = Bigstring.to_string(buf);
+  String.sub(str, ~pos=1, ~len=64);
 };
 
-module Signature = {
-  type t = ptr(unit);
-  let to_string: t => string = signature => serialize(signature);
-};
+type signature = (int, string, string);
 
-let sign = {
-  let ctx = Context.create(Char.chr(1));
-  ();
-};
+let sign = (~msg, ~key) => {
+  let _ = create_context();
+  let __ = key;
 
-let verify = {
-  let ctx = allocateContext.create(Char.chr(1));
-  let result = ECDSA.verify(ptr(ctx));
-  ();
+  (0, msg, "");
 };

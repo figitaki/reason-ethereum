@@ -18,6 +18,9 @@ let compare: (t, t) => int;
 
 let to_string: t => string;
 
+/* Decodes a hex-encoded string */
+let of_string: string => t;
+
 let from_string: string => t;
 
 let rlp_of_t: t => Rlp.t;

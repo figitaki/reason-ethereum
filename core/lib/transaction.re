@@ -11,12 +11,12 @@ module Signature = {
     [
       Int256.rlp_of_t(r),
       Int256.rlp_of_t(s),
-      Rlp.of_string(String.make(1, Char.chr(v)))
+      Rlp.of_string(String.make(1, Char.chr(v))),
     ]
     |> Rlp.of_list;
   };
-  /** TODO implement **/
-  let of_rlp = rlp => (26, Int256.zero, Int256.zero);
+  /** TODO implement **/;
+  /* let of_rlp = rlp => (26, Int256.zero, Int256.zero); */
 };
 
 type t = {
@@ -27,7 +27,7 @@ type t = {
   value: Int256.t,
   signature: Signature.t,
   init: string,
-  data: string
+  data: string,
 };
 
 type receipt = (Int256.t, Int256.t, string, Int256.t);
@@ -40,11 +40,11 @@ let rlp_of_t = tx =>
     Address.rlp_of_t(tx.recipient),
     Int256.rlp_of_t(tx.value),
     Signature.rlp_of_t(tx.signature),
-    Rlp.of_string(tx.data)
+    Rlp.of_string(tx.data),
   ]
   |> Rlp.of_list;
 
-let of_rlp = rlp => {
+let of_rlp = _rlp => {
   nonce: Int256.zero,
   gasPrice: Int256.zero,
   gasLimit: Int256.zero,
@@ -52,8 +52,7 @@ let of_rlp = rlp => {
   value: Int256.zero,
   signature: (0, Int256.zero, Int256.zero),
   init: "",
-  data: ""
+  data: "",
 };
-
 
 let hash = tx => rlp_of_t(tx) |> Rlp.encode |> Hash.from_string;

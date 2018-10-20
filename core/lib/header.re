@@ -12,7 +12,7 @@ type t = {
   timestamp: Int256.t,
   extraData: string,
   mixHash: Hash.t,
-  nonce: Int64.t
+  nonce: Int64.t,
 };
 
 /*
@@ -21,7 +21,7 @@ type t = {
 /**
   Validates the block header, returns true if valid, otherwise false.
  */
-let valid = header => true;
+let valid = _header => true;
 /*
  type t = {
    parentHash: Hash.t,

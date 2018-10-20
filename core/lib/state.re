@@ -2,6 +2,6 @@ open Rethereum_rlp;
 
 type t = string;
 
-let get = (_, address) => Account.of_rlp(Rlp.empty);
+let get = (_, _address) => Account.of_rlp(Rlp.empty);
 
-let set = (state, address, account) => state;
+let set = (state, _address, _account) => state;

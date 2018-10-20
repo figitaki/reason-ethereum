@@ -1,16 +1,21 @@
-module type Pubkey = {
-  type t;
-  let of_string: string => t;
-  let to_bits: t => string;
-};
+type context;
 
-module type Signature = {
-  type t = (int, string, string);
-  let of_string: string => t;
-  let to_bits: t => string;
-};
+/* Private key represented as a 32-byte string */
+type seckey = string;
 
-let pubkey: string => Pubkey.t;
+/* Public key represented as a 64-byte string */
+type pubkey;
+
+/* Recoverable ECDSA signature as a tuple of (r, s, v) */
+type signature = (int, string, string);
+
+let create_context: unit => context;
+
+let random_seckey: unit => seckey;
+
+let create_pubkey: (context, seckey) => pubkey;
+
+let serialize_pubkey: (context, pubkey) => string;
 
 /** Creaet an ECDSA Signature
  *
@@ -18,13 +23,13 @@ let pubkey: string => Pubkey.t;
  * Params - msg: the 32-byte message hash being signed.
  *          key: a 32-byte secret key
  */
-let sign: (~msg: string, ~key: string) => signature;
+let sign: (~msg: string, ~key: seckey) => signature;
 
-let recover: (~msg: string, ~v: int, ~r: string, ~s: string) => pubkey;
+/*let recover_pubkey: (~msg: string, ~signature: signature) => pubkey; */
 
 /** Verify an ECDSA signature.
  *
  * Returns: true: correct signature
  *          false: incorrect or unparseable signature
- */
-let verify: (Signature.t, ~msg: string, ~pubkey: Pubkey.t) => bool;
+ */;
+/* let verify: (Signature.t, ~msg: string, ~pubkey: Pubkey.t) => string; */
